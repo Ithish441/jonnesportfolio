@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Default Vector Pointer */
+body, .w95-desktop, .w95-win, .w95-content {
+  cursor: url('/icons/arrow-cursor.svg'), default !important;
+}
+
+/* Clickable Vector Hand */
+a, button, .w95-btn, .w95-dicon, .w95-sm-item, .w95-contact-btn, .w95-proj-icon, [style*="cursor: pointer"] {
+  cursor: url('/icons/hand-cursor.svg'), pointer !important;
+}
+
+/* Hero Marquee Hover Wave */
+.w95-hero-marquee-container {
+  position: absolute;
+  top: 5%;
+  bottom: 15%;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 5;
+  pointer-events: none; /* Empty space passes clicks */
+  overflow: hidden;
+  user-select: none;
+}
+
+.w95-marquee-line {
+  display: flex;
+  white-space: pre;
+  width: max-content;
+  pointer-events: auto; /* Catch hover exactly on the line/text */
+  animation: scroll-marquee linear infinite;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.12); /* Subtle watermark text color */
+}
+
+.w95-marquee-line.reverse {
+  animation-direction: reverse;
+}
+
+@keyframes scroll-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.w95-marquee-char {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), color 0.2s, text-shadow 0.2s;
+  cursor: url('/icons/arrow-cursor.svg'), default !important;
+}
+
+/* Base Hovers: The character itself */
+.w95-marquee-char:hover {
+  transform: translateY(-25px) scale(1.2);
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,1);
+}
+
+/* Neighbors (distance 1) */
+.w95-marquee-char:hover + .w95-marquee-char,
+.w95-marquee-char:has(+ .w95-marquee-char:hover) {
+  transform: translateY(-16px) scale(1.1);
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+/* Neighbors (distance 2) */
+.w95-marquee-char:hover + .w95-marquee-char + .w95-marquee-char,
+.w95-marquee-char:has(+ .w95-marquee-char + .w95-marquee-char:hover) {
+  transform: translateY(-8px) scale(1.05);
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0 0 5px rgba(255,255,255,0.4);
+}
+
+/* Neighbors (distance 3) */
+.w95-marquee-char:hover + .w95-marquee-char + .w95-marquee-char + .w95-marquee-char,
+.w95-marquee-char:has(+ .w95-marquee-char + .w95-marquee-char + .w95-marquee-char:hover) {
+  transform: translateY(-3px);
+  color: rgba(255,255,255,0.5);
+}
