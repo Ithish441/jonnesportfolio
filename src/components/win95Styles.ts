@@ -691,4 +691,20 @@ img, svg {
   cursor: pointer;
 }
 .w95-email-row:hover { background: #E0E0FF; }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  /* Force all windows to act as 'Maximized' on mobile devices */
+  .w95-win {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: calc(100vh - 30px) !important; /* Account for taskbar */
+    height: calc(100dvh - 30px) !important; /* Dynamic viewport support */
+    max-height: calc(100dvh - 30px) !important;
+    bottom: 28px !important;
+  }
+}
 `;
